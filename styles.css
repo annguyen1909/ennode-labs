@@ -294,3 +294,207 @@ section {
 .lenis.lenis-smooth iframe {
   pointer-events: none;
 }
+
+/* ========================================
+   RESPONSIVE DESIGN - MEDIA QUERIES
+   ======================================== */
+
+/* Tablet and smaller (max-width: 1024px) */
+@media (max-width: 1024px) {
+  h1 {
+    font-size: clamp(80px, 15vw, 150px);
+  }
+
+  nav {
+    padding: 1.5em 1.5em;
+  }
+
+  .nav-links {
+    gap: 1.5em;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+  }
+
+  .intro {
+    padding: 8em 1.5em 4em 1.5em;
+  }
+
+  .header-row p {
+    width: 100%;
+    font-size: 13px;
+  }
+
+  .archive {
+    padding: 4em 1.5em;
+  }
+
+  .archive-item h2 {
+    font-size: clamp(40px, 8vw, 60px);
+  }
+
+  .outro {
+    padding: 4em 1.5em 2em 1.5em;
+  }
+
+  .outro-copy h2 {
+    width: 100%;
+    font-size: clamp(40px, 8vw, 50px);
+  }
+}
+
+/* Mobile landscape and smaller (max-width: 768px) */
+@media (max-width: 768px) {
+  body {
+    min-height: 300vh;
+  }
+
+  h1 {
+    font-size: clamp(60px, 12vw, 100px);
+    line-height: 0.9;
+  }
+
+  nav {
+    padding: 1em 1em;
+    flex-direction: column;
+    gap: 1em;
+    align-items: flex-start;
+  }
+
+  .logo {
+    height: 30px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 0.8em;
+    width: 100%;
+  }
+
+  .nav-links a {
+    font-size: 11px;
+  }
+
+  .intro {
+    padding: 6em 1em 3em 1em;
+    gap: 2em;
+  }
+
+  .header-row {
+    gap: 1em;
+  }
+
+  .header-row p {
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .archive {
+    padding: 3em 1em;
+    gap: 2em;
+  }
+
+  .archive-header p {
+    font-size: 10px;
+  }
+
+  .archive-item {
+    gap: 1em;
+  }
+
+  .archive-item h2 {
+    font-size: clamp(32px, 7vw, 45px);
+  }
+
+  .archive-info {
+    flex-direction: column;
+    gap: 0.5em;
+  }
+
+  .archive-info p {
+    font-size: 12px;
+  }
+
+  .outro {
+    padding: 3em 1em 1.5em 1em;
+  }
+
+  .outro-copy h2 {
+    font-size: clamp(28px, 6vw, 40px);
+    margin-bottom: 1.5em;
+  }
+
+  .outro-footer p {
+    font-size: 10px;
+  }
+
+  /* Adjust 3D model container for mobile */
+  .model {
+    pointer-events: auto;
+  }
+
+  .model canvas {
+    width: 100vw !important;
+    height: 100vh !important;
+  }
+}
+
+/* Small mobile (max-width: 480px) */
+@media (max-width: 480px) {
+  h1 {
+    font-size: clamp(48px, 11vw, 70px);
+  }
+
+  .intro {
+    padding: 5em 0.8em 2.5em 0.8em;
+  }
+
+  .archive {
+    padding: 2.5em 0.8em;
+  }
+
+  .archive-item h2 {
+    font-size: clamp(28px, 6.5vw, 38px);
+  }
+
+  .outro {
+    padding: 2.5em 0.8em 1.5em 0.8em;
+  }
+
+  .outro-copy h2 {
+    font-size: clamp(24px, 5.5vw, 32px);
+  }
+
+  .loading-text {
+    font-size: 10px;
+  }
+
+  .loading-subtext {
+    font-size: 9px;
+  }
+
+  .loading-spinner {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* Landscape orientation adjustments */
+@media (max-height: 600px) and (orientation: landscape) {
+  h1 {
+    font-size: clamp(40px, 8vh, 80px);
+  }
+
+  .intro {
+    padding: 4em 1em 2em 1em;
+  }
+
+  .archive-item h2 {
+    font-size: clamp(30px, 6vh, 50px);
+  }
+
+  .outro-copy h2 {
+    font-size: clamp(24px, 5vh, 40px);
+  }
+}

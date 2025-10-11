@@ -523,3 +523,28 @@ TIPS:
 - Use the browser console to test: modelPositionConfig.keyframes[0].position.x = 1
 - Refresh the page to see changes take effect
 */
+
+// ========================================
+// RESPONSIVE HANDLING
+// ========================================
+
+// Handle window resize for responsive design
+window.addEventListener('resize', () => {
+  // Update camera aspect ratio
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  
+  // Update renderer size
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Cap at 2 for performance
+});
+
+// Optimize for mobile devices
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+if (isMobile) {
+  // Reduce quality slightly on mobile for better performance
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+  
+  // Adjust scroll speed for mobile
+  modelPositionConfig.smoothing = 0.15; // Slightly more responsive on mobile
+}

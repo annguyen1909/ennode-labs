@@ -178,6 +178,14 @@ loader.load(
       visible: model.visible,
     });
 
+    // Hide loading screen once model is fully loaded
+    const loadingScreen = document.querySelector('.loading-screen');
+    if (loadingScreen) {
+      setTimeout(() => {
+        loadingScreen.classList.add('fade-out');
+      }, 500); // Small delay for smooth transition
+    }
+
     animate();
   },
   // Progress callback

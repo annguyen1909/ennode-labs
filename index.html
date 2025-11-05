@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Visual Ennode | Ennode Lab</title>
     
-    <!-- Favicon -->
+  <!-- Biểu tượng trang (Favicon) -->
     <link rel="icon" type="image/png" href="./assets/favicon-dark.png" />
     <link rel="shortcut icon" type="image/png" href="./assets/favicon-dark.png" />
     
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <!-- Loading Screen -->
+  <!-- Màn hình tải -->
     <div class="loading-screen">
       <div class="loading-content">
         <div class="loading-spinner"></div>
@@ -115,6 +115,55 @@
       </div>
     </section>
 
+    <!-- New sections: About, Features, Contact -->
+    <section id="about" class="about">
+      <div class="container">
+        <h2>About Ennode Lab</h2>
+        <p>
+          Ennode Lab blends cinematic language with architectural visualization to
+          craft immersive, emotionally-driven visuals. We focus on narrative,
+          material fidelity, and cinematic lighting to elevate each project.
+        </p>
+      </div>
+    </section>
+
+    <section id="features" class="features">
+      <div class="container">
+        <h2>Features</h2>
+        <!-- Inline flow canvas so Flow.glb can render inside this section -->
+        <div id="flow-canvas" class="flow-canvas" aria-hidden="true"></div>
+        <div class="features-grid">
+          <div class="feature">
+            <h3>Photoreal Lighting</h3>
+            <p>Accurate PBR, HDR environments and cinematic post-processing.</p>
+          </div>
+          <div class="feature">
+            <h3>Interactive Preview</h3>
+            <p>Realtime 3D previews with subtle interaction and camera framing.</p>
+          </div>
+          <div class="feature">
+            <h3>Custom Animations</h3>
+            <p>Scroll-driven choreography and smooth timeline control.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="container">
+        <h2>Contact</h2>
+        <p>
+          For inquiries and collaborations reach out at
+          <a href="mailto:hello@ennodelab.com">hello@ennodelab.com</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- custom cursor element -->
+    <div id="custom-cursor" class="custom-cursor"></div>
+  <!-- particle trail canvas -->
+  <canvas id="cursor-particles" class="cursor-particles"></canvas>
+
     <section class="outro">
       <div class="outro-copy">
         <h2>
@@ -143,6 +192,28 @@
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/RGBELoader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <!-- Shader hậu xử lý (phải tải trước các pass) -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/FilmShader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/FXAAShader.js"></script>
+  <!-- Các pass hậu xử lý -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/math/SimplexNoise.js"></script>
+  <!-- Local shim that attaches SimplexNoise to THREE (ensures SSAOPass can construct THREE.SimplexNoise) -->
+  <script src="./libs/SimplexNoise.js"></script>
+  <!-- SSAO shader dependencies -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/SSAOShader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/DepthShader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/DepthLimitedBlurShader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/SSAOPass.js"></script>
+  <!-- Bokeh shader dependency -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/BokehShader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/BokehPass.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/FilmPass.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="./script.js"></script>

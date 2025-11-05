@@ -5,6 +5,8 @@
   font-family: "Montserrat", sans-serif;
 }
 
+/* Assembly UI removed */
+
 html,
 body {
   width: 100vw;
@@ -17,17 +19,70 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   
-  /* Hide scrollbar like Lusion website */
+  /* Ẩn thanh cuộn giống trang Lusion */
   scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
+  -ms-overflow-style: none; /* IE và Edge */
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
+/* Animated cinematic background gradient (subtle) */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0; /* behind content */
+  pointer-events: none;
+  background: radial-gradient(600px 400px at 10% 20%, rgba(20,36,60,0.18), transparent 12%),
+              radial-gradient(500px 300px at 85% 80%, rgba(8,18,30,0.14), transparent 14%),
+              linear-gradient(120deg, rgba(6,12,20,0.4), rgba(12,6,30,0.25));
+  mix-blend-mode: overlay;
+  transform: translateZ(0);
+  animation: bgShift 18s ease-in-out infinite;
+}
+
+@keyframes bgShift {
+  0% { background-position: 0% 0%, 100% 100%, 0% 0%; }
+  50% { background-position: 10% 5%, 90% 95%, 100% 100%; }
+  100% { background-position: 0% 0%, 100% 100%, 0% 0%; }
+}
+
+/* Subtle glow behind the 3D canvas to make the model pop */
+.model::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1600px;
+  height: 900px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(closest-side, rgba(80,160,255,0.06), rgba(10,10,10,0));
+  filter: blur(45px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Nav hover underline animation */
+nav a {
+  position: relative;
+  overflow: visible;
+}
+nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.9), rgba(120,200,255,0.6));
+  transition: width 280ms cubic-bezier(.2,.9,.2,1);
+}
+nav a:hover::after { width: 100%; }
+
+/* Ẩn thanh cuộn cho Chrome, Safari và Opera */
 body::-webkit-scrollbar {
   display: none;
 }
 
-/* Loading Screen */
+/* Màn hình tải */
 .loading-screen {
   position: fixed;
   top: 0;
@@ -118,7 +173,8 @@ p span {
 
 .model {
   position: fixed;
-  z-index: 2;
+  z-index: 1; /* Phía sau nội dung */
+  pointer-events: none; /* Cho phép nhấp chuột xuyên qua nội dung */
 }
 
 nav {
@@ -130,7 +186,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 10;
+  z-index: 10; /* Trên mọi thứ */
 }
 
 .nav-links {
@@ -159,6 +215,8 @@ nav a:hover {
 section {
   width: 100vw;
   height: 100vh;
+  position: relative;
+  z-index: 5; /* Trên canvas 3D */
 }
 
 .intro {
@@ -228,6 +286,110 @@ section {
   padding: 6em 2em 2em 2em;
   min-height: 100vh;
   height: auto;
+}
+
+/* New semantic sections: About / Features / Contact */
+.about,
+.features,
+.contact {
+  width: 100vw;
+  padding: 6em 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+
+.about .container,
+.features .container,
+.contact .container {
+  max-width: 1200px;
+  width: 100%;
+}
+
+.about h2,
+.features h2,
+.contact h2 {
+  font-size: 36px;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.about p,
+.contact p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.9);
+  max-width: 800px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.feature h3 {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.feature p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.8);
+}
+
+/* Global parallax cursor (outer ring + inner border-only disk)
+   The cursor element is created dynamically by script (client-only).
+   Classes intentionally mirror the React component naming for clarity. */
+.global-cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 44px;
+  height: 44px;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(1);
+  z-index: 99999;
+  transition: transform 120ms linear, opacity 200ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.global-cursor::before {
+  content: '';
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(160,160,160,0.85);
+  box-sizing: border-box;
+  background: transparent;
+  pointer-events: none;
+}
+
+/* Inner disk that will have a subtle parallax offset */
+.global-cursor-inner {
+  position: fixed; /* inner is separate and positioned by JS */
+  left: 0;
+  top: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: transparent; /* empty inner disk — border only */
+  border: 2px solid rgba(160,160,160,0.85);
+  transform: translate3d(-50%, -50%, 0);
+  transition: transform 140ms cubic-bezier(.2,.9,.2,1), background 180ms linear;
+  will-change: transform;
+  z-index: 99999;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .global-cursor { display: none; }
 }
 
 .outro-copy h2 {
@@ -429,7 +591,7 @@ section {
     font-size: 10px;
   }
 
-  /* Adjust 3D model container for mobile */
+  /* Điều chỉnh container mô hình 3D cho di động */
   .model {
     pointer-events: auto;
   }
